@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>All Experiments</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            padding: 28px 16px;
+            background: #f1f5f9;
+            color: #526174;
+            font: 18px/1.8 Arial, Helvetica, sans-serif
+        }
+
+        main {
+            max-width: 1280px;
+            margin: auto
+        }
+
+        .experiment {
+            background: #fff;
+            border: 1px solid #d7e1ef;
+            border-radius: 22px;
+            padding: 34px 40px;
+            margin: 0 0 28px;
+            box-shadow: 0 10px 30px rgba(24, 53, 93, .05)
+        }
+
+        h1,
+        h2 {
+            color: #2453df;
+            line-height: 1.25
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0 0 28px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #d8e6ff
+        }
+
+        h2 {
+            font-size: 36px;
+            margin: 28px 0 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #d8e6ff
+        }
+
+        h3 {
+            font-size: 21px;
+            color: #111827;
+            margin: 24px 0 8px
+        }
+
+        p {
+            margin: 0 0 14px
+        }
+
+        ul,
+        ol {
+            margin: 0 0 18px;
+            padding-left: 28px
+        }
+
+        li {
+            padding-left: 4px;
+            margin: 2px 0
+        }
+
+        a {
+            color: #2453df;
+            text-decoration: underline;
+            overflow-wrap: anywhere
+        }
+
+        pre {
+            margin: 12px 0 24px;
+            padding: 20px 24px;
+            background: #111827;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            border-radius: 13px;
+            overflow: auto;
+            font: 16px/1.65 Consolas, "Courier New", monospace;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere
+        }
+
+        .body-line {
+            margin-bottom: 10px
+        }
+
+        .spacer {
+            height: 8px
+        }
+
+        @media(max-width:650px) {
+            body {
+                padding: 12px 8px;
+                font-size: 16px
+            }
+
+            .experiment {
+                padding: 22px 18px;
+                border-radius: 16px
+            }
+
+            h1,
+            h2 {
+                font-size: 27px
+            }
+
+            h3 {
+                font-size: 19px
+            }
+
+            pre {
+                font-size: 14px;
+                padding: 16px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="experiment">
+            <h1>Experiment 1:</h1>
+            <h3>Aim: Implement the Multilayer Perceptron algorithm to simulate XOR gate.</h3>
+            <h3>Objectives:</h3>
+            <ul>
+                <li>To understand the working of a Multilayer Perceptron (MLP).</li>
+                <li>To implement MLP using backpropagation.</li>
+                <li>To simulate the XOR gate and predict its outputs correctly.</li>
+            </ul>
+            <h3>Theory:</h3>
+            <p>A Multilayer Perceptron (MLP) is a feedforward neural network consisting of input, hidden, and output
+                layers. It uses activation functions such as sigmoid and learns through backpropagation. MLP can
+                simulate the XOR gate because its hidden layer can learn non-linear relationships that a single-layer
+                perceptron cannot.</p>
+            <h3>Algorithm:</h3>
+            <p class="body-line">1. Initialize weights and biases randomly.</p>
+            <p class="body-line">2. Define the XOR input and output dataset.</p>
+            <p class="body-line">3. Perform forward propagation through the hidden and output layers.</p>
+            <p class="body-line">4. Calculate the prediction error.</p>
+            <p class="body-line">5. Apply backpropagation to update weights and biases.</p>
+            <p class="body-line">6. Repeat until the error is minimized.</p>
+            <p class="body-line">7. Test the trained network with all XOR inputs.</p>
+            <h3>Conclusion:</h3>
+            <p>The MLP was successfully implemented using backpropagation and correctly simulated the XOR gate for all
+                input combinations.</p>
+            <h3>Code Link: <a
+                    href="https://drive.google.com/file/d/1P4BdE3JBcDVKhDh_yceL9CmKRZFIcXjP/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://drive.google.com/file/d/1P4BdE3JBcDVKhDh_yceL9CmKRZFIcXjP/view?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 2:</h1>
+            <h3>Aim: Apply Stochastic Gradient Descent algorithm to learn the parameters of the</h3>
+            <p>supervised single-layer feed-forward neural network.</p>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand Stochastic Gradient Descent (SGD).</li>
+                <li>To implement a single-layer feed-forward neural network.</li>
+                <li>To update weights after processing each training sample.</li>
+                <li>To minimize loss during training.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>Stochastic Gradient Descent (SGD) is an optimization algorithm that updates the network&#39;s weights and
+                biases after processing each individual training sample. It enables frequent updates and can converge
+                quickly, but its updates may be noisy and less stable than batch-based methods.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Load and normalize the supervised dataset.</li>
+                <li>Split the data into training and testing sets.</li>
+                <li>Initialize weights and bias.</li>
+                <li>Perform forward propagation for one training sample.</li>
+                <li>Calculate the prediction error and gradients.</li>
+                <li>Update weights and bias using the learning rate.</li>
+                <li>Repeat for all samples over multiple epochs.</li>
+                <li>Evaluate the model&#39;s accuracy.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>Stochastic Gradient Descent was implemented to optimize the parameters of a single-layer feed-forward
+                neural network by updating weights after each training sample.</p>
+            <h3>Code Link: <a
+                    href="https://drive.google.com/file/d/1p8G9__hUuNF0a5ChvvhTCIlV25PQIB-E/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://drive.google.com/file/d/1yEsflxqGkjtx6hrCPFjQi6pp0hGoiZsP/view?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 3:</h1>
+            <h3>Aim: Apply Mini Batch Gradient Descent algorithm to learn the parameters of the</h3>
+            <p>supervised single-layer feed-forward neural network.</p>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand Mini-Batch Gradient Descent.</li>
+                <li>To implement a single-layer feed-forward neural network.</li>
+                <li>To update weights using small batches of training samples.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>Mini-Batch Gradient Descent divides the training dataset into small batches and updates the model&#39;s
+                weights after processing each batch. It provides more stable convergence than Stochastic Gradient
+                Descent and improves computational efficiency.</p>
+            <h2>3. Algorithm</h2>
+            <p class="body-line">1. Load and normalize the dataset.</p>
+            <p class="body-line">2. Split the data into training and testing sets.</p>
+            <p class="body-line">3. Initialize weights and bias.</p>
+            <p class="body-line">4. Divide training data into mini-batches.</p>
+            <p class="body-line">5. Perform forward propagation and calculate loss for each batch.</p>
+            <p class="body-line">6. Compute gradients and update weights and bias.</p>
+            <p class="body-line">7. Repeat for multiple epochs.</p>
+            <p class="body-line">8. Evaluate the model&#39;s performance.</p>
+            <p>Conclusion</p>
+            <p>Mini-Batch Gradient Descent was implemented to update network parameters using small batches, enabling
+                efficient training and stable convergence.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1N8AeBw7_jInd7QrQ-HvMwncQ5Dc2Ab9X?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1N8AeBw7_jInd7QrQ-HvMwncQ5Dc2Ab9X?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 4: </h1>
+            <h3>Aim: Design and implement a fully connected deep neural network with at least 2 hidden layers for a
+                classification application. Use an appropriate Learning Algorithm, output function, and loss function.
+            </h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the architecture of a Deep Neural Network (DNN).</li>
+                <li>To design a fully connected network with at least two hidden layers.</li>
+                <li>To train and evaluate a classification model using TensorFlow/Keras.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>A Deep Neural Network (DNN) is a feed-forward neural network consisting of an input layer, two or more
+                hidden layers, and an output layer. Each neuron connects to every neuron in the next layer. ReLU is
+                commonly used in hidden layers, while sigmoid or softmax is used in the output layer. The network learns
+                through backpropagation using an optimizer such as Adam.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import the required libraries and load the dataset.</li>
+                <li>Preprocess and normalize the data.</li>
+                <li>Split the dataset into training and testing sets.</li>
+                <li>Build a DNN with at least two hidden layers.</li>
+                <li>Select suitable activation and loss functions.</li>
+                <li>Compile the model using the Adam optimizer.</li>
+                <li>Train and evaluate the model.</li>
+                <li>Display accuracy, loss, and predicted classes.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>A fully connected Deep Neural Network with at least two hidden layers was designed and implemented for
+                classification, and its performance was evaluated using accuracy and loss.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1jFG0yyd0lB09kqhC6YdE8iuMDngeAviT?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1jFG0yyd0lB09kqhC6YdE8iuMDngeAviT?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 5:</h1>
+            <h3>Aim: Design the architecture and implement the autoencoder model for Image Compression.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the concept of autoencoders.</li>
+                <li>To design an encoder–decoder neural network.</li>
+                <li>To compress images into a lower-dimensional latent representation.</li>
+                <li>To evaluate image reconstruction quality.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>An autoencoder is an unsupervised neural network consisting of an encoder and a decoder. The encoder
+                compresses an image into a smaller latent representation, while the decoder reconstructs the image. ReLU
+                is used in hidden layers, sigmoid in the output layer, and Mean Squared Error (MSE) measures
+                reconstruction loss.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and load the MNIST dataset.</li>
+                <li>Normalize pixel values to the range \([0,1]\).</li>
+                <li>Reshape images into vectors.</li>
+                <li>Build the encoder, bottleneck, and decoder.</li>
+                <li>Compile the model using Adam optimizer and MSE loss.</li>
+                <li>Train using input images as both inputs and targets.</li>
+                <li>Display and compare original and reconstructed images.</li>
+                <li>Evaluate reconstruction loss.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The autoencoder was implemented for image compression and successfully learned compact image
+                representations to reconstruct the original images.</p>
+            <h3>Copy Link: <a
+                    href="https://colab.research.google.com/drive/1HP01LJLyDV703aSbrE-5rDigpwponDdf?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1HP01LJLyDV703aSbrE-5rDigpwponDdf?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 6:</h1>
+            <h3>Aim: Design the architecture and implement the autoencoder model for Image denoising.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the concept of autoencoders.</li>
+                <li>To design an encoder–decoder neural network.</li>
+                <li>To remove noise from images using an autoencoder.</li>
+                <li>To evaluate the quality of reconstructed images.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>An autoencoder is an unsupervised neural network consisting of an encoder and a decoder. The encoder
+                extracts important features, while the decoder reconstructs the image. For denoising, noisy images are
+                given as input and clean images as target output. ReLU is used in hidden layers, sigmoid in the output
+                layer, and Mean Squared Error (MSE) measures reconstruction loss.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and load the MNIST dataset.</li>
+                <li>Normalize the pixel values to the range \([0,1]\).</li>
+                <li>Add noise to the images to create noisy inputs.</li>
+                <li>Build the encoder, bottleneck, and decoder.</li>
+                <li>Compile the model using Adam optimizer and MSE loss.</li>
+                <li>Train using noisy images as inputs and clean images as targets.</li>
+                <li>Display and compare noisy and denoised images.</li>
+                <li>Evaluate reconstruction loss.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The autoencoder was implemented for image denoising and learned to reconstruct cleaner images by removing
+                noise from the input images.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1T7X-qYQ6yE0MkV1O8T2tolIiBRIOjJ-U?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1T7X-qYQ6yE0MkV1O8T2tolIiBRIOjJ-U?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 7:</h1>
+            <h3>Aim: Design and implement a CNN model for a digit recognition application.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the architecture of a Convolutional Neural Network (CNN).</li>
+                <li>To implement convolution, pooling, and fully connected layers.</li>
+                <li>To train a CNN for handwritten digit recognition.</li>
+                <li>To evaluate classification performance using accuracy and loss.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>A Convolutional Neural Network (CNN) is a deep learning model designed for image classification.
+                Convolutional layers extract features, ReLU introduces non-linearity, and max-pooling reduces
+                feature-map dimensions. The flatten layer converts features into a vector, while dense and softmax
+                output layers classify images. The model is trained using the Adam optimizer and sparse categorical
+                cross-entropy loss.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and load the MNIST dataset.</li>
+                <li>Normalize pixel values and reshape images.</li>
+                <li>Build convolutional layers with ReLU and max-pooling.</li>
+                <li>Flatten the feature maps and add dense and output layers.</li>
+                <li>Compile the model using Adam, sparse categorical cross-entropy, and accuracy.</li>
+                <li>Train the CNN on the training dataset.</li>
+                <li>Evaluate it on the test dataset.</li>
+                <li>Display accuracy, loss, and predicted digit labels.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The CNN model was implemented for handwritten digit recognition and evaluated using test accuracy and
+                loss.</p>
+            <h3>Copy Link:<a
+                    href="https://colab.research.google.com/drive/1mx1QsvNi5gv2um7aEeBaARqj2IkG7Hhe?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1mx1QsvNi5gv2um7aEeBaARqj2IkG7Hhe?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 8:</h1>
+            <h3>Aim: Design and implement LSTM model for handwriting recognition.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the architecture and working of an LSTM network.</li>
+                <li>To learn how LSTMs handle sequential data and long-term dependencies.</li>
+                <li>To prepare sequential datasets and train an LSTM model.</li>
+                <li>To evaluate model performance using suitable metrics.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>Long Short-Term Memory (LSTM) is a type of Recurrent Neural Network (RNN) designed to learn long-term
+                dependencies in sequential data. It overcomes the vanishing-gradient problem using a memory cell and
+                three gates: forget, input, and output. These gates control which information is discarded, stored, and
+                passed forward. LSTMs are used in handwriting recognition, speech recognition, machine translation, and
+                time-series forecasting.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Collect and preprocess the sequential dataset.</li>
+                <li>Create input sequences and split the data into training, validation, and testing sets.</li>
+                <li>Initialize the LSTM network and its hidden and cell states.</li>
+                <li>Process each time step using the forget, input, and output gates.</li>
+                <li>Generate predictions and calculate the loss.</li>
+                <li>Apply backpropagation through time to update weights.</li>
+                <li>Repeat training until convergence.</li>
+                <li>Evaluate the model and compare predictions with actual outputs.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The LSTM model was designed to learn sequential patterns and long-term dependencies, enabling predictions
+                for sequence-based applications.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1zL7tJSUJHqvv5c7Z1Ihoin_Y_LJW0LMs?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1zL7tJSUJHqvv5c7Z1Ihoin_Y_LJW0LMs?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 9:</h1>
+            <h3>Aim: Design and implement LSTM model for machine translation.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the application of LSTM in machine translation.</li>
+                <li>To design an encoder–decoder neural network.</li>
+                <li>To train the model to translate text from one language to another.</li>
+                <li>To evaluate the translation output.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>Machine translation converts text from one language into another using deep learning. An encoder–decoder
+                LSTM processes the input sentence and generates the translated sentence. The encoder captures
+                information from the source sequence, while the decoder uses this information to generate
+                target-language words sequentially. LSTM gates help retain important contextual information throughout
+                the sequence.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and prepare parallel sentences in both languages.</li>
+                <li>Tokenize the sentences and convert them into numerical sequences.</li>
+                <li>Prepare encoder inputs and decoder target sequences.</li>
+                <li>Build the encoder–decoder LSTM model.</li>
+                <li>Compile the model using an optimizer and suitable loss function.</li>
+                <li>Train the model on the sentence pairs.</li>
+                <li>Provide an input sentence and generate its translation.</li>
+                <li>Compare the predicted translation with the expected output.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The encoder–decoder LSTM approach was used to learn relationships between source and target sentences for
+                machine translation.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1PEyLE153vecGSVU9YhgfYu-p8D9vVNs7?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1PEyLE153vecGSVU9YhgfYu-p8D9vVNs7?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 10:</h1>
+            <h3>Aim: Design and implement GRU for any real-life application.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the architecture and working of GRU.</li>
+                <li>To prepare sequential data for time-series forecasting.</li>
+                <li>To design, train, and test a GRU model.</li>
+                <li>To compare actual and predicted values using visualization.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>A Gated Recurrent Unit (GRU) is a type of Recurrent Neural Network designed to process sequential and
+                time-series data. It uses two gates: the update gate, which controls how much past information is
+                retained, and the reset gate, which controls how much past information is forgotten. GRU can learn
+                temporal patterns and long-term dependencies while requiring fewer parameters than LSTM.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and generate or load time-series data.</li>
+                <li>Normalize the data and split it into training and testing sets.</li>
+                <li>Create input sequences using a fixed time window.</li>
+                <li>Build a GRU layer followed by a dense output layer.</li>
+                <li>Compile and train the model.</li>
+                <li>Predict future values using the trained model.</li>
+                <li>Convert predictions back to the original scale.</li>
+                <li>Calculate prediction error and plot actual versus predicted values.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The GRU model was implemented for time-series forecasting and used to predict sequential values. Its
+                performance was assessed by comparing actual and predicted values graphically.</p>
+            <h3>copy Link: <a
+                    href="https://colab.research.google.com/drive/1mdCP_BrrSOKuN76AXes6UEEaj-EEaMrk?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1mdCP_BrrSOKuN76AXes6UEEaj-EEaMrk?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 11:</h1>
+            <h3>Aim: Design and implement RNN for the classification of temporal data modelling.</h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand the architecture and working of a Recurrent Neural Network (RNN).</li>
+                <li>To implement an RNN for temporal data classification.</li>
+                <li>To learn how RNNs retain information from previous time steps.</li>
+                <li>To train and evaluate the model using suitable metrics.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>A Recurrent Neural Network (RNN) is designed to process sequential data by maintaining a hidden state
+                that carries information from previous time steps. At each time step, it processes the current input and
+                previous hidden state to generate a new hidden state. RNNs are useful for temporal data classification
+                because they learn patterns across sequences. They are trained using Backpropagation Through Time
+                (BPTT), but may suffer from the vanishing-gradient problem.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Import libraries and prepare the sequential dataset.</li>
+                <li>Preprocess and normalize the data.</li>
+                <li>Create input sequences and split them into training and testing sets.</li>
+                <li>Build an RNN model with a recurrent layer and output layer.</li>
+                <li>Compile the model using a suitable optimizer and loss function.</li>
+                <li>Train the model using the training data.</li>
+                <li>Predict classes for test sequences.</li>
+                <li>Evaluate performance using accuracy and loss.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The RNN model was designed and implemented for temporal data classification, learning sequential patterns
+                to predict the corresponding output classes.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/16MGxBeVjfuuAFcaFWaQCJQDW-Cnoe_nO?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/16MGxBeVjfuuAFcaFWaQCJQDW-Cnoe_nO?usp=drive_link</a>
+            </h3>
+        </section>
+        <section class="experiment">
+            <h1>Experiment 12:</h1>
+            <h3>Aim: </h3>
+            <h3>Objectives</h3>
+            <ul>
+                <li>To understand RNN-based sequence-to-sequence modelling.</li>
+                <li>To process sentences using tokenization.</li>
+                <li>To train an RNN to map input sentences to output sentences.</li>
+            </ul>
+            <h3>Theory</h3>
+            <p>A Recurrent Neural Network (RNN) processes sequential data such as sentences, maintaining information
+                from previous time steps. Tokenization converts words into numerical sequences, while an embedding layer
+                represents words as vectors. The RNN learns word-sequence patterns and generates an output at each time
+                step using return_sequences=True.</p>
+            <h3>Algorithm</h3>
+            <ul>
+                <li>Prepare input and target sentences.</li>
+                <li>Tokenize sentences and convert them into padded sequences.</li>
+                <li>Build an RNN model with embedding and output layers.</li>
+                <li>Compile and train the model.</li>
+                <li>Predict output sequences for input sentences.</li>
+                <li>Convert predicted word IDs back into words.</li>
+            </ul>
+            <p>Conclusion</p>
+            <p>The RNN was implemented for sentence-to-sentence sequence modelling and trained to learn patterns between
+                input and target sentences.</p>
+            <h3>Code Link: <a
+                    href="https://colab.research.google.com/drive/1Nr3vAbm_FW1o0NSl9DLIULpN9cNnhWoW?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer">https://colab.research.google.com/drive/1Nr3vAbm_FW1o0NSl9DLIULpN9cNnhWoW?usp=drive_link</a>
+            </h3>
+        </section>
+    </main>
+</body>
+
+</html>
