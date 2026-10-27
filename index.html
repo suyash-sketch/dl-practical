@@ -45,6 +45,10 @@
       border-bottom: 2px solid #d8e6ff
     }
 
+    code {
+      font-size: 12px;
+    }
+
     h2 {
       font-size: 36px;
       margin: 28px 0 18px;
@@ -81,8 +85,8 @@
 
     pre {
       margin: 12px 0 24px;
-      padding: 20px 24px;
       background: #111827;
+      padding: 12px 24px;
       color: #f8fafc;
       border: 1px solid #334155;
       border-radius: 13px;
@@ -155,6 +159,84 @@
       <h3>Conclusion:</h3>
       <p>The MLP was successfully implemented using backpropagation and correctly simulated the XOR gate for all
         input combinations.</p>
+      <pre><code>
+          import numpy as np
+
+          # XOR input and target output
+          X = np.array([[0, 0],[0, 1],[1, 0],[1, 1]])
+
+          y = np.array([[0],[1],[1],[0]])
+
+          # Set random seed for reproducibility
+          np.random.seed(42)
+
+          # Network architecture: 2 input neurons, 4 hidden neurons, 1 output neuron
+          input_neurons = 2
+          hidden_neurons = 4
+          output_neurons = 1
+
+          # Initialize weights and biases
+          W1 = np.random.randn(input_neurons, hidden_neurons)
+          b1 = np.zeros((1, hidden_neurons))
+
+          W2 = np.random.randn(hidden_neurons, output_neurons)
+          b2 = np.zeros((1, output_neurons))
+
+          # Sigmoid activation function
+          def sigmoid(x):
+          return 1 / (1 + np.exp(-x))
+
+          # Derivative of sigmoid using its output
+          def sigmoid_derivative(x):
+          return x * (1 - x)
+
+          # Training parameters
+          learning_rate = 0.5
+          epochs = 20000
+
+          # Train the neural network
+          for epoch in range(epochs):
+
+          # Forward propagation
+          hidden_input = np.dot(X, W1) + b1
+          hidden_output = sigmoid(hidden_input)
+
+          final_input = np.dot(hidden_output, W2) + b2
+          predicted_output = sigmoid(final_input)
+
+          # Calculate error
+          error = y - predicted_output
+
+          # Backpropagation: output layer
+          d_output = error * sigmoid_derivative(predicted_output)
+
+          # Backpropagation: hidden layer
+          hidden_error = np.dot(d_output, W2.T)
+          d_hidden = hidden_error * sigmoid_derivative(hidden_output)
+
+          # Update weights and biases
+          W2 += learning_rate * np.dot(hidden_output.T, d_output)
+          b2 += learning_rate * np.sum(d_output, axis=0, keepdims=True)
+
+          W1 += learning_rate * np.dot(X.T, d_hidden)
+          b1 += learning_rate * np.sum(d_hidden, axis=0, keepdims=True)
+
+          # Test the trained network
+          print("XOR Gate Results:")
+          print("-----------------")
+
+          for i in range(len(X)):
+          hidden_output = sigmoid(np.dot(X[i:i+1], W1) + b1)
+          output = sigmoid(np.dot(hidden_output, W2) + b2)
+
+          result = 1 if output[0, 0] >= 0.5 else 0
+
+          print(
+          f"Input: {X[i]} | "
+          f"Predicted: {output[0, 0]:.4f} | "
+          f"XOR Output: {result}"
+          )
+        </code></pre>
       <h3>Code Link: <a href="https://drive.google.com/file/d/1P4BdE3JBcDVKhDh_yceL9CmKRZFIcXjP/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://drive.google.com/file/d/1P4BdE3JBcDVKhDh_yceL9CmKRZFIcXjP/view?usp=drive_link</a>
@@ -189,6 +271,40 @@
       <p>Conclusion</p>
       <p>Stochastic Gradient Descent was implemented to optimize the parameters of a single-layer feed-forward
         neural network by updating weights after each training sample.</p>
+      <pre><code>import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import SGDClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Generate dataset
+X, y = make_classification(n_samples=100, n_features=4, n_classes=2, random_state=42)
+
+# Split dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Normalize features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.fit_transform(X_test)
+
+# Initialize SGD classifier
+model = SGDClassifier(loss='log_loss', learning_rate='constant', eta0=0.01, max_iter=1000, random_state=42)
+
+# Train model
+model.fit(X_train, y_train)
+print("Training Complete!")
+
+# Predict and evaluate
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Accuracy:", accuracy)
+print("Learned Weights:\n", model.coef_)
+print("Learned Bias:", model.intercept_)</code></pre>
       <h3>Code Link: <a href="https://drive.google.com/file/d/1p8G9__hUuNF0a5ChvvhTCIlV25PQIB-E/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://drive.google.com/file/d/1yEsflxqGkjtx6hrCPFjQi6pp0hGoiZsP/view?usp=drive_link</a>
@@ -208,7 +324,7 @@
       <p>Mini-Batch Gradient Descent divides the training dataset into small batches and updates the model&#39;s
         weights after processing each batch. It provides more stable convergence than Stochastic Gradient
         Descent and improves computational efficiency.</p>
-      <h2>3. Algorithm</h2>
+      <h3>Algorithm</h3>
       <p class="body-line">1. Load and normalize the dataset.</p>
       <p class="body-line">2. Split the data into training and testing sets.</p>
       <p class="body-line">3. Initialize weights and bias.</p>
@@ -220,6 +336,40 @@
       <p>Conclusion</p>
       <p>Mini-Batch Gradient Descent was implemented to update network parameters using small batches, enabling
         efficient training and stable convergence.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import accuracy_score
+
+# Generate data
+X, y = make_classification(n_samples=100, n_features=4, n_classes=2, random_state=42)
+
+# Plot data
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='bwr', edgecolors='k')
+plt.title("Classification Dataset")
+plt.show()
+
+# Normalize data
+X = StandardScaler().fit_transform(X)
+
+# Mini-batch SGD
+model = SGDClassifier(loss='log_loss', learning_rate='constant', eta0=0.05, random_state=42)
+
+batch_size, epochs = 16, 20
+
+for epoch in range(epochs):
+    idx = np.random.permutation(len(X))
+    for i in range(0, len(X), batch_size):
+        batch = idx[i:i + batch_size]
+        model.partial_fit(X[batch], y[batch], classes=np.array([0, 1]))
+
+    if (epoch + 1) % 2 == 0 or epoch == 0:
+        print(f"Epoch {epoch+1}/{epochs} completed")
+
+print('Learned Weights: ', model.coef_)
+print('Learned Bias: ', model.intercept_)</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1N8AeBw7_jInd7QrQ-HvMwncQ5Dc2Ab9X?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1N8AeBw7_jInd7QrQ-HvMwncQ5Dc2Ab9X?usp=drive_link</a>
@@ -255,6 +405,57 @@
       <p>Conclusion</p>
       <p>A fully connected Deep Neural Network with at least two hidden layers was designed and implemented for
         classification, and its performance was evaluated using accuracy and loss.</p>
+      <pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.utils import to_categorical
+
+(X_train_raw, y_train_raw), (X_test_raw, y_test_raw) = tf.keras.datasets.mnist.load_data()
+
+X_train_raw.shape
+
+y_train_raw.shape
+
+X_train = X_train_raw.reshape(-1, 784)
+X_test = X_test_raw.reshape(-1, 784)
+
+X_train.shape
+
+X_test.shape
+
+X_train = X_train.astype('float32') / 255.0
+X_test = X_test.astype('float32') / 255.0
+
+y_train = to_categorical(y_train_raw, num_classes=10)
+y_test = to_categorical(y_test_raw, num_classes=10)
+
+model = Sequential([
+    Dense(128, activation = 'relu', input_shape = (784, )),
+    Dropout(0.2),
+    Dense(64, activation = 'relu'),
+    Dropout(0.2),
+    Dense(10, activation='softmax')
+])
+
+model.summary()
+
+model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+
+history = model.fit(X_train, y_train, epochs = 10, validation_split=0.2, batch_size=64)
+
+test_loss, test_accuracy = model.evaluate(X_test, y_test)
+display(test_loss, test_accuracy)
+
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.show()
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.show()</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1jFG0yyd0lB09kqhC6YdE8iuMDngeAviT?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1jFG0yyd0lB09kqhC6YdE8iuMDngeAviT?usp=drive_link</a>
@@ -289,6 +490,54 @@
       <p>Conclusion</p>
       <p>The autoencoder was implemented for image compression and successfully learned compact image
         representations to reconstruct the original images.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Input
+from tensorflow.keras.datasets import mnist
+
+(X_train, _), (X_test, _) = mnist.load_data()
+
+X_train = X_train.reshape(-1, 784) / 255.0
+X_test = X_test.reshape(-1, 784) / 255.0
+
+# Encoder
+inp = Input(shape=(784, ))
+encoded = Dense(64, activation='relu')(inp)
+
+# Decoder
+decoded = Dense(784, activation='sigmoid')(encoded)
+
+# Autoencoedr
+autoencoder = Model(inp, decoded)
+autoencoder.compile(optimizer = 'adam', loss = 'mse')
+
+# Model Training
+autoencoder.fit(X_train, X_train, epochs = 5, batch_size = 256, validation_data = (X_test, X_test))
+
+# Image Reconstruction
+reconstructed = autoencoder.predict(X_test[:10])
+
+# Display original and reconstructed images
+plt.figure(figsize=(12, 3))
+
+for i in range(10):
+    # Original images (first row)
+    plt.subplot(2, 10, i + 1)
+    plt.imshow(X_test[i].reshape(28, 28), cmap='gray')
+    plt.axis('off')
+
+    # Reconstructed images (second row)
+    plt.subplot(2, 10, i + 11)
+    plt.imshow(reconstructed[i].reshape(28, 28), cmap='gray')
+    plt.axis('off')
+
+plt.suptitle("Original Images vs Reconstructed Images")
+plt.tight_layout()
+plt.show()
+
+test_loss = autoencoder.evaluate(X_test, X_test, verbose=0)
+print("Test Reconstruction MSE:", test_loss)</code></pre>
       <h3>Copy Link: <a href="https://colab.research.google.com/drive/1HP01LJLyDV703aSbrE-5rDigpwponDdf?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1HP01LJLyDV703aSbrE-5rDigpwponDdf?usp=drive_link</a>
@@ -323,6 +572,48 @@
       <p>Conclusion</p>
       <p>The autoencoder was implemented for image denoising and learned to reconstruct cleaner images by removing
         noise from the input images.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+
+# Load and normalize images
+(X_train, _), (X_test, _) = mnist.load_data()
+X_train = X_train.reshape(-1, 784).astype('float32') / 255.0
+X_test = X_test.reshape(-1, 784).astype('float32') / 255.0
+
+# Add noise
+X_train_noisy = np.clip(X_train + 0.3 * np.random.randn(*X_train.shape), 0, 1)
+X_test_noisy = np.clip(X_test + 0.3 * np.random.randn(*X_test.shape), 0, 1)
+
+# Encoder
+inp = Input(shape=(784,))
+encoded = Dense(64, activation='relu')(inp)
+
+# Decoder
+decoded = Dense(784, activation='sigmoid')(encoded)
+
+# Autoencoder
+autoencoder = Model(inp, decoded)
+autoencoder.compile(optimizer='adam', loss='mse')
+
+# model fitting using noisy data
+autoencoder.fit(X_train_noisy, X_train, epochs = 5, batch_size = 256, validation_data = (X_test_noisy, X_test))
+
+# Denoise images
+denoised = autoencoder.predict(X_test_noisy[:10])
+
+for i in range(10):
+    plt.subplot(2, 10, i + 1)
+    plt.imshow(X_test_noisy[i].reshape(28, 28), cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(2, 10, i + 11)
+    plt.imshow(denoised[i].reshape(28, 28), cmap='gray')
+    plt.axis('off')
+
+plt.show()</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1T7X-qYQ6yE0MkV1O8T2tolIiBRIOjJ-U?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1T7X-qYQ6yE0MkV1O8T2tolIiBRIOjJ-U?usp=drive_link</a>
@@ -358,6 +649,52 @@
       <p>Conclusion</p>
       <p>The CNN model was implemented for handwritten digit recognition and evaluated using test accuracy and
         loss.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+
+# Load and preprocess data
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+X_train = X_train.astype('float32') / 255.0
+X_test = X_test.astype('float32') / 255.0
+X_train = X_train[..., np.newaxis]
+X_test = X_test[..., np.newaxis]
+
+X_train.shape
+
+# Build CNN model
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dense(10, activation='softmax')
+])
+
+# Compile and train
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(X_train, y_train, epochs=5, batch_size=64, validation_data=(X_test, y_test))
+
+# Evaluate
+loss, accuracy = model.evaluate(X_test, y_test)
+print("Test Accuracy:", accuracy)
+print("Test Loss:", loss)
+
+# Predict and display
+pred = np.argmax(model.predict(X_test[:10], verbose=0), axis=1)
+
+plt.figure(figsize=(12, 3))
+for i in range(10):
+    plt.subplot(1, 10, i + 1)
+    plt.imshow(X_test[i].squeeze(), cmap='gray')
+    plt.title(f"{y_test[i]}/{pred[i]}")
+    plt.axis('off')
+plt.show()</code></pre>
       <h3>Copy Link:<a href="https://colab.research.google.com/drive/1mx1QsvNi5gv2um7aEeBaARqj2IkG7Hhe?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1mx1QsvNi5gv2um7aEeBaARqj2IkG7Hhe?usp=drive_link</a>
@@ -393,6 +730,45 @@
       <p>Conclusion</p>
       <p>The LSTM model was designed to learn sequential patterns and long-term dependencies, enabling predictions
         for sequence-based applications.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+# Load and normalize data
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+X_train = X_train.astype('float32') / 255.0
+X_test = X_test.astype('float32') / 255.0
+
+# Build LSTM model
+model = Sequential([
+    LSTM(64, input_shape=(28, 28)),
+    Dense(10, activation='softmax')
+])
+
+# Compile and train
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.fit(X_train, y_train, epochs=5, batch_size=64,
+          validation_data=(X_test, y_test))
+
+# Evaluate
+loss, acc = model.evaluate(X_test, y_test, verbose=0)
+print("Test Accuracy:", acc)
+
+# Predict and display
+pred = np.argmax(model.predict(X_test[:10], verbose=0), axis=1)
+
+plt.figure(figsize=(10, 3))
+for i in range(10):
+    plt.subplot(1, 10, i + 1)
+    plt.imshow(X_test[i], cmap='gray')
+    plt.title(f"{y_test[i]}/{pred[i]}")
+    plt.axis('off')
+plt.show()</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1zL7tJSUJHqvv5c7Z1Ihoin_Y_LJW0LMs?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1zL7tJSUJHqvv5c7Z1Ihoin_Y_LJW0LMs?usp=drive_link</a>
@@ -428,6 +804,75 @@
       <p>Conclusion</p>
       <p>The encoder–decoder LSTM approach was used to learn relationships between source and target sentences for
         machine translation.</p>
+      <pre><code>import numpy as np
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, TextVectorization
+from tensorflow.keras.models import Model
+
+# 1. Dataset
+eng = ["hello how are you", "deep learning is great",
+       "machine translation using lstm", "i love computer science"]
+
+fr = ["startseq bonjour comment allez vous endseq",
+      "startseq le deep learning est genial endseq",
+      "startseq traduction automatique avec lstm endseq",
+      "startseq j aime l informatique endseq"]
+
+# 2. Tokenization
+src_vec = TextVectorization(output_sequence_length=10)
+trg_vec = TextVectorization(output_sequence_length=10)
+src_vec.adapt(eng)
+trg_vec.adapt(fr)
+
+X_enc = src_vec(eng)
+Y_full = trg_vec(fr)
+X_dec, Y = Y_full[:, :-1], Y_full[:, 1:]
+
+src_vocab = len(src_vec.get_vocabulary())
+trg_vocab = len(trg_vec.get_vocabulary())
+
+# 3. Encoder
+enc_in = Input(shape=(10,))
+_, h, c = LSTM(64, return_state=True)(
+    Embedding(src_vocab, 32)(enc_in))
+
+# 4. Decoder
+dec_in = Input(shape=(9,))
+emb = Embedding(trg_vocab, 32)(dec_in)
+dec_out = LSTM(64, return_sequences=True)(emb, initial_state=[h, c])
+out = Dense(trg_vocab, activation="softmax")(dec_out)
+
+# 5. Model, compile and train
+model = Model([enc_in, dec_in], out)
+model.compile(optimizer="adam",
+              loss="sparse_categorical_crossentropy",
+              metrics=["accuracy"])
+
+# Ignore padding tokens (token ID 0) in loss
+mask = tf.cast(Y != 0, tf.float32)
+
+model.fit([X_enc, X_dec], Y, sample_weight=mask,
+          epochs=100, batch_size=2)
+
+print("Machine translation model trained!")
+
+# Translate English to French
+sentence = input("Enter English sentence: ").lower()
+state = enc_in(ev(np.array([sentence])))
+
+token = int(fv(np.array(["&lt;start&gt;"])).numpy()[0, 0])
+result = []
+
+for _ in range(10):
+    pred, h, c = decoder([np.array([[token]]), *state])
+    token = int(tf.argmax(pred[0, 0]).numpy())
+    word = fv.get_vocabulary()[token]
+    if word == "&lt;end&gt;":
+        break
+    result.append(word)
+    state = [h, c]
+
+print("French Translation:", " ".join(result))</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1PEyLE153vecGSVU9YhgfYu-p8D9vVNs7?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1PEyLE153vecGSVU9YhgfYu-p8D9vVNs7?usp=drive_link</a>
@@ -462,6 +907,57 @@
       <p>Conclusion</p>
       <p>The GRU model was implemented for time-series forecasting and used to predict sequential values. Its
         performance was assessed by comparing actual and predicted values graphically.</p>
+      <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import GRU, Dense
+
+# Generate sine wave data
+series = np.sin(np.linspace(0, 30, 500))
+LOOKBACK = 10
+
+# Create sequences
+X, y = [], []
+for i in range(len(series) - LOOKBACK):
+    X.append(series[i:i+LOOKBACK])
+    y.append(series[i+LOOKBACK])
+
+X = np.array(X).reshape(-1, LOOKBACK, 1)
+y = np.array(y)
+
+# Split data
+split = int(0.8 * len(X))
+X_train, X_test = X[:split], X[split:]
+y_train, y_test = y[:split], y[split:]
+
+# Build GRU model
+model = Sequential([
+    GRU(32, input_shape=(LOOKBACK, 1)),
+    Dense(1)
+])
+
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+
+# Train
+model.fit(X_train, y_train, epochs=10, batch_size=16,
+          validation_data=(X_test, y_test))
+
+# Evaluate and predict
+loss, mae = model.evaluate(X_test, y_test, verbose=0)
+pred = model.predict(X_test, verbose=0)
+
+print("Test MSE:", round(loss, 5))
+print("Test MAE:", round(mae, 5))
+
+# Plot results
+plt.plot(y_test, label='Actual')
+plt.plot(pred, label='Predicted')
+plt.xlabel('Time Steps')
+plt.ylabel('Value')
+plt.title('GRU Time-Series Forecasting')
+plt.legend()
+plt.grid()
+plt.show()</code></pre>
       <h3>copy Link: <a href="https://colab.research.google.com/drive/1mdCP_BrrSOKuN76AXes6UEEaj-EEaMrk?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1mdCP_BrrSOKuN76AXes6UEEaj-EEaMrk?usp=drive_link</a>
@@ -497,6 +993,42 @@
       <p>Conclusion</p>
       <p>The RNN model was designed and implemented for temporal data classification, learning sequential patterns
         to predict the corresponding output classes.</p>
+      <pre><code>import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
+
+# Generate data
+np.random.seed(42)
+X = np.random.randn(1000, 10, 1)
+y = (X.sum(axis=1) &gt; 0).astype(int).ravel()
+
+# Split data
+X_train, X_test = X[:800], X[800:]
+y_train, y_test = y[:800], y[800:]
+
+# Build RNN model
+model = Sequential([
+    SimpleRNN(32, input_shape=(10, 1)),
+    Dense(1, activation='sigmoid')
+])
+
+# Compile and train
+model.compile(optimizer='adam',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+model.fit(X_train, y_train, epochs=10, batch_size=32,
+          validation_data=(X_test, y_test))
+
+# Evaluate
+loss, acc = model.evaluate(X_test, y_test, verbose=0)
+print("Test Loss:", round(loss, 4))
+print("Test Accuracy:", round(acc * 100, 2), "%")
+
+# Predict sample labels
+pred = (model.predict(X_test[:3], verbose=0) &gt; 0.5).astype(int)
+print("Actual:", y_test[:3])
+print("Predicted:", pred.ravel())</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/16MGxBeVjfuuAFcaFWaQCJQDW-Cnoe_nO?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/16MGxBeVjfuuAFcaFWaQCJQDW-Cnoe_nO?usp=drive_link</a>
@@ -504,7 +1036,7 @@
     </section>
     <section class="experiment">
       <h1>Experiment 12:</h1>
-      <h3>Aim: </h3>
+      <h3>Aim: Design and implement an RNN model for sentence-to-sequence sequence modelling.</h3>
       <h3>Objectives</h3>
       <ul>
         <li>To understand RNN-based sequence-to-sequence modelling.</li>
@@ -528,6 +1060,32 @@
       <p>Conclusion</p>
       <p>The RNN was implemented for sentence-to-sentence sequence modelling and trained to learn patterns between
         input and target sentences.</p>
+      <pre><code>import numpy as np
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.utils import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, TimeDistributed
+
+X = ["i like cats", "i like dogs", "you like cats"]
+Y = ["i love cats", "i love dogs", "you love cats"]
+
+tok = Tokenizer()
+tok.fit_on_texts(X + Y)
+x = pad_sequences(tok.texts_to_sequences(X), padding='post')
+y = pad_sequences(tok.texts_to_sequences(Y), padding='post')
+
+model = Sequential([
+    Embedding(len(tok.word_index)+1, 8, mask_zero=True),
+    SimpleRNN(16, return_sequences=True),
+    TimeDistributed(Dense(len(tok.word_index)+1, activation='softmax'))
+])
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+model.fit(x, np.expand_dims(y, -1), epochs=200, verbose=0)
+
+pred = model.predict(x, verbose=0).argmax(axis=-1)
+for seq in pred:
+    print(" ".join(tok.index_word.get(i, "") for i in seq if i))</code></pre>
       <h3>Code Link: <a href="https://colab.research.google.com/drive/1Nr3vAbm_FW1o0NSl9DLIULpN9cNnhWoW?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer">https://colab.research.google.com/drive/1Nr3vAbm_FW1o0NSl9DLIULpN9cNnhWoW?usp=drive_link</a>
